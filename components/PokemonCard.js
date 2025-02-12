@@ -37,7 +37,7 @@ export default function PokemonCard({ pokemon }) {
                     transition={1000}
                 />
                 <Text style={styles.id}># {pokemon.id}</Text>
-                <Text style={styles.name}>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Text>
+                <Text style={styles.name}>{pokemon.name}</Text>
                 <View style={styles.typecontainer}>
                     {pokemon.types &&
                         pokemon.types.map((type, index) => {
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     },
     name: {
         fontWeight: 'bold',
-        fontSize: 40
+        fontSize: 40,
+        textTransform: "capitalize"
     },
     typecontainer: {
         flexDirection: 'row',
@@ -94,5 +95,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         backgroundColor: 'green',
         minWidth: 80,
+        textTransform: "capitalize"
     }
 });

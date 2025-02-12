@@ -1,19 +1,20 @@
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import PokemonCard from "../components/PokemonCard";
-import { useState } from 'react';
-import { TextInput } from 'react-native-paper';
+import { useEffect, useState } from 'react';
+
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
-export default function PokemonScreen({ navigation }) {
-    const [searchText, setSearchText] = useState('')
-    const [pokemon, setPokemon] = useState({ id: 1, name: 'Bulbasaur' })
+export default function PokemonScreen({ navigation, route }) {
+
+    const [pokemon, setPokemon] = useState(null)
+
+    const { url } = route.params;
 
     const fetchPokemon = (id) => {
-        if (id !== null) {
-            const address = BASE_URL + id
-            setSearchText('')
-            fetch(address)
+        if (url) {
+            //const address = BASE_URL + id
+            fetch(url)
                 .then(response => response.json())
                 .then((result) => {
                     const json = result
@@ -30,6 +31,10 @@ export default function PokemonScreen({ navigation }) {
         }
     }
 
+    useEffect(() => {
+        fetchPokemon()
+    })
+
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -37,17 +42,6 @@ export default function PokemonScreen({ navigation }) {
                 {pokemon &&
                     <PokemonCard pokemon={pokemon} />
                 }
-                <View style={styles.searchcontainer}>
-                    <TextInput style={styles.searchfield}
-                        placeholder='Pokemon ID or name'
-                        value={searchText}
-                        onChangeText={text => setSearchText(text)}
-                        mode='outlined'
-                    />
-                    <Pressable style={styles.button} title='Search' onPress={() => fetchPokemon(searchText)}>
-                        <Text style={styles.buttontext}>Search</Text>
-                    </Pressable>
-                </View>
             </View>
         </View>
     )
@@ -77,14 +71,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 10,
     },
-    searchcontainer: {
-        flexDirection: 'column',
-        marginTop: 16,
-    },
-    searchfield: {
-        borderRadius: 50,
-        marginBottom: 8,
-    },
+    
     button: {
         backgroundColor: '#2BF',
         borderRadius: 20,

@@ -1,19 +1,19 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useEffect, useState } from "react"
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
-import { Button } from "react-native-paper"
+import { Button, TextInput } from "react-native-paper"
+import PokemonRow from "../components/PokemonRow"
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/?&limit=151'
 
 export default function HomeScreen({ navigation }) {
-    //Implement screen that loads 20 pokemon at start and saves them to local cache
-    //Screen has a button to load next 20 pokemons in FlatList
-    //Screen loads a preview image for every pokemon
-    //pokemon can be clicked and navigate to PokemonScreen that loads PokemonCard
+    //TODO
+    //Screen loads a preview image for every pokemon ?
     //User can search for Pokemons
 
     const [pokemons, setPokemons] = useState([])
+    const [searchText, setSearchText] = useState('')
 
     useEffect(() => {
         const loadPokemons = async () => {
@@ -47,19 +47,30 @@ export default function HomeScreen({ navigation }) {
         }
     }
 
-    const Pokemon = ({ pokemon }) => {
-            <Text>{pokemon.name}</Text>
-    }
-
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>PokeDex</Text>
-            <FlatList
-                data={pokemons}
-                renderItem={({ item }) => <Pokemon pokemon={item} />}
-                keyExtractor={(pokemon) => pokemon.name}
-            />
-            <Button title="PokemonScreen" onPress={() => navigation.navigate('PokemonScreen')}>PokemonScreen</Button>
+            <View style={styles.content}>
+
+                <Text style={styles.header}>PokeDex</Text>
+
+                <View style={styles.searchcontainer}>
+                    <TextInput style={styles.searchfield}
+                        placeholder='Pokemon ID or name'
+                        value={searchText}
+                        onChangeText={text => setSearchText(text)}
+                        mode='outlined'
+                    />
+                </View>
+
+                <View style={styles.listview}>
+                    <FlatList
+                        data={pokemons}
+                        renderItem={({ item }) => <PokemonRow pokemon={item} navigation={navigation} />}
+                        keyExtractor={(pokemon) => pokemon.name}
+                    />
+                </View>
+
+            </View>
         </View>
     )
 }
@@ -87,5 +98,21 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         borderColor: 'black',
         borderRadius: 10,
-    }
+    },
+    searchcontainer: {
+        marginTop: 16,
+    },
+    searchfield: {
+        borderRadius: 50,
+        marginBottom: 8,
+    },
+    listview: {
+        flex: 1,
+        flexDirection: 'column',
+        borderRadius: 20,
+        borderWidth: 5,
+        width: '100%',
+        paddingHorizontal: 10,
+    },
+
 })
