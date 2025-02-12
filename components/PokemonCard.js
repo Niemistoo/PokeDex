@@ -24,7 +24,7 @@ export default function PokemonCard({ pokemon }) {
         rock: '#a38c21',
         steel: '#9eb7b8',
         water: '#4592c4',
-    };
+    }
 
     if (pokemon) {
         return (

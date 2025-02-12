@@ -1,60 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
-import PokemonCard from './components/PokemonCard';
-import { Button, PaperProvider, TextInput } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { PaperProvider} from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CustomNavBar from './components/CustomNavBar';
+import HomeScreen from './screens/HomeScreen';
+import PokemonScreen from './screens/PokemonScreen';
 
-const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
+
 
 export default function App() {
-  const [searchText, setSearchText] = useState('')
-  const [pokemon, setPokemon] = useState({ id: 1, name: 'Bulbasaur' })
 
-  const fetchPokemon = (id) => {
-    if (id !== null) {
-      const address = BASE_URL + id
-      setSearchText('')
-      fetch(address)
-        .then(response => response.json())
-        .then((result) => {
-          const json = result
-          console.log(json.sprites.other["official-artwork"].front_default)
-          setPokemon({
-            id: json.id,
-            name: json.name,
-            types: json.types.map(t => t.type.name),
-            img_src: json.sprites.other["official-artwork"].front_default
-          })
-        }).catch((error) => {
-          console.log(error)
-          setPokemon(null)
-        })
-    }
-  }
+  const Stack = createStackNavigator();
 
   return (
     <PaperProvider>
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <Text style={styles.header}>PokeDex</Text>
-          {pokemon &&
-            <PokemonCard pokemon={pokemon} />
-          }
-          <View style={styles.searchcontainer}>
-            <TextInput style={styles.searchfield}
-              placeholder='Pokemon ID or name'
-              value={searchText}
-              onChangeText={text => setSearchText(text)}
-              mode='outlined'
-            />
-            <Pressable style={styles.button} title='Search' onPress={() => fetchPokemon(searchText)}>
-              <Text style={styles.buttontext}>Search</Text>
-            </Pressable>
-          </View>
-
-          <StatusBar style="auto" />
-        </View>
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="PokeDex"
+          screenOptions={{
+            header: (props) => <CustomNavBar {...props} />,
+          }}
+        >
+          <Stack.Screen name="PokeDex" component={HomeScreen} />
+          <Stack.Screen name="PokemonScreen" component={PokemonScreen} />
+        </Stack.Navigator>    
+      </NavigationContainer>
     </PaperProvider>
   );
 }
@@ -83,23 +53,4 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 10,
   },
-  searchcontainer: {
-    flexDirection: 'column',
-    marginTop: 16,
-  },
-  searchfield: {
-    borderRadius: 50,
-    marginBottom: 8,
-  },
-  button: {
-    backgroundColor: '#2BF',
-    borderRadius: 20,
-    height: 50,
-    justifyContent: 'center'
-  },
-  buttontext: {
-    fontSize: 30,
-    textAlign: 'center',
-    paddingVertical: 8,
-  }
 });
