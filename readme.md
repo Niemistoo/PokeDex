@@ -5,6 +5,7 @@ Search for your favourite Pokemon from original 151 pokemons. This is not for co
 <br><br>
 
 <img src="./assets/pokedex_preview1.png" alt="PokeDex preview image" width="300" height="600">
+<img src="./assets/pokedex_preview3.png" alt="PokeDex preview image" width="300" height="600">
 <img src="./assets/pokedex_preview2.png" alt="PokeDex preview image" width="300" height="600">
 
 <br><br>
