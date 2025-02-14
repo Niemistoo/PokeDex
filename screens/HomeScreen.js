@@ -36,7 +36,8 @@ export default function HomeScreen({ navigation }) {
             const response = await fetch(BASE_URL)
             const data = await response.json()
 
-            const pokemons = data.results[0]
+            const pokemons = data.results
+            console.log(pokemons)
 
             await AsyncStorage.setItem("pokemons", JSON.stringify(pokemons))
             return pokemons
