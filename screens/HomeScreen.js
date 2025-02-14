@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
 import { Button, TextInput } from "react-native-paper"
@@ -8,12 +8,11 @@ import PokemonRow from "../components/PokemonRow"
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/?&limit=151'
 
 export default function HomeScreen({ navigation }) {
-    //TODO
-    //Screen loads a preview image for every pokemon ?
-    //User can search for Pokemons
 
     const [pokemons, setPokemons] = useState([])
-    const [searchText, setSearchText] = useState('')
+    const [criteria, setCriteria] = useState('')
+    const filteredPokemons = useMemo(() => 
+        criteria.length > 0 ? pokemons.filter((pokemon) => pokemon.name.startsWith(criteria.toLowerCase())) : pokemons,[pokemons, criteria])
 
     useEffect(() => {
         const loadPokemons = async () => {
@@ -55,16 +54,16 @@ export default function HomeScreen({ navigation }) {
 
                 <View style={styles.searchcontainer}>
                     <TextInput style={styles.searchfield}
-                        placeholder='Pokemon ID or name'
-                        value={searchText}
-                        onChangeText={text => setSearchText(text)}
+                        placeholder='Pokemon name'
+                        value={criteria}
+                        onChangeText={text => setCriteria(text)}
                         mode='outlined'
                     />
                 </View>
 
                 <View style={styles.listview}>
                     <FlatList
-                        data={pokemons}
+                        data={filteredPokemons}
                         renderItem={({ item }) => <PokemonRow pokemon={item} navigation={navigation} />}
                         keyExtractor={(pokemon) => pokemon.name}
                     />
