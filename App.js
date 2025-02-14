@@ -1,4 +1,4 @@
-import { PaperProvider} from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CustomNavBar from './components/CustomNavBar';
@@ -19,7 +19,7 @@ export default function App() {
         >
           <Stack.Screen name="PokéDex" component={HomeScreen} />
           <Stack.Screen name="Pokémon" component={PokemonScreen} />
-        </Stack.Navigator>    
+        </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
   );

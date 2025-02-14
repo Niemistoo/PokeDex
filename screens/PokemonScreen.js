@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import PokemonCard from "../components/PokemonCard";
 import { useEffect, useState } from 'react';
 import Header from "../components/Header";
+import { ScrollView } from "react-native-gesture-handler";
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
@@ -34,12 +35,12 @@ export default function PokemonScreen({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.content}>
+            <ScrollView style={styles.content}>
                 <Header />
                 {pokemon &&
                     <PokemonCard pokemon={pokemon} />
                 }
-            </View>
+            </ScrollView>
         </View>
     )
 }

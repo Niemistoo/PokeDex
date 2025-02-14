@@ -12,8 +12,8 @@ export default function HomeScreen({ navigation }) {
 
     const [pokemons, setPokemons] = useState([])
     const [criteria, setCriteria] = useState('')
-    const filteredPokemons = useMemo(() => 
-        criteria.length > 0 ? pokemons.filter((pokemon) => pokemon.name.startsWith(criteria.toLowerCase())) : pokemons,[pokemons, criteria])
+    const filteredPokemons = useMemo(() =>
+        criteria.length > 0 ? pokemons.filter((pokemon) => pokemon.name.startsWith(criteria.toLowerCase())) : pokemons, [pokemons, criteria])
 
     useEffect(() => {
         const loadPokemons = async () => {
@@ -51,7 +51,6 @@ export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-
                 <Header />
                 <SearchBar styles={styles.searchfield} criteria={criteria} setCriteria={setCriteria} />
                 <View style={styles.listview}>
@@ -61,7 +60,6 @@ export default function HomeScreen({ navigation }) {
                         keyExtractor={(pokemon) => pokemon.name}
                     />
                 </View>
-
             </View>
         </View>
     )
@@ -70,17 +68,17 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 32,
+        padding: 24,
         backgroundColor: '#f00',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     content: {
         width: '100%',
         height: '100%',
-        borderColor: 'black'
+        borderColor: 'black',
+        marginTop: 0,
     },
-
     searchcontainer: {
         marginTop: 16,
     },
