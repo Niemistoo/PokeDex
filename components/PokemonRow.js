@@ -6,7 +6,7 @@ export default function PokemonRow({ pokemon, navigation }) {
     return (
         <Pressable 
             style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} 
-            onPress={() => navigation.navigate("PokemonScreen", { url: pokemon.url })}
+            onPress={() => navigation.navigate("Pokémon", { url: pokemon.url })}
         >
             <Text style={styles.rowtext}>{pokemon.name}</Text>
         </Pressable>

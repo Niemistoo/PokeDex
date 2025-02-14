@@ -1,9 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useEffect, useMemo, useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
 import PokemonRow from "../components/PokemonRow"
 import SearchBar from "../components/SearchBar"
+import Header from "../components/Header"
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/?&limit=151'
 
@@ -50,7 +51,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
             <View style={styles.content}>
 
-                <Text style={styles.header}>PokéDex</Text>
+                <Header />
                 <SearchBar styles={styles.searchfield} criteria={criteria} setCriteria={setCriteria} />
                 <View style={styles.listview}>
                     <FlatList
@@ -78,17 +79,7 @@ const styles = StyleSheet.create({
         height: '100%',
         borderColor: 'black'
     },
-    header: {
-        alignSelf: 'center',
-        fontSize: 60,
-        fontWeight: 'bold',
-        margin: 8,
-        paddingHorizontal: 16,
-        backgroundColor: 'yellow',
-        borderWidth: 5,
-        borderColor: 'black',
-        borderRadius: 10,
-    },
+
     searchcontainer: {
         marginTop: 16,
     },

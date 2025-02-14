@@ -33,7 +33,7 @@ export default function PokemonCard({ pokemon }) {
                     style={styles.image}
                     source={{ uri: pokemon.img_src }}
                     placeholder={{ blurhash }}
-                    contentFit="cover"
+                    contentFit="contain"
                     transition={1000}
                 />
                 <Text style={styles.id}># {pokemon.id}</Text>
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 300,
         backgroundColor: '#0553',
+        
     },
     id: {
         fontSize: 20,

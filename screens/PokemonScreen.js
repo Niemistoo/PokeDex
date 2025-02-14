@@ -1,14 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import PokemonCard from "../components/PokemonCard";
 import { useEffect, useState } from 'react';
-
+import Header from "../components/Header";
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
 export default function PokemonScreen({ navigation, route }) {
-
     const [pokemon, setPokemon] = useState(null)
-
     const { url } = route.params;
 
     const fetchPokemon = () => {
@@ -37,7 +35,7 @@ export default function PokemonScreen({ navigation, route }) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.header}>PokéDex</Text>
+                <Header />
                 {pokemon &&
                     <PokemonCard pokemon={pokemon} />
                 }
@@ -59,27 +57,4 @@ const styles = StyleSheet.create({
         height: '100%',
         borderColor: 'black'
     },
-    header: {
-        alignSelf: 'center',
-        fontSize: 60,
-        fontWeight: 'bold',
-        margin: 8,
-        paddingHorizontal: 16,
-        backgroundColor: 'yellow',
-        borderWidth: 5,
-        borderColor: 'black',
-        borderRadius: 10,
-    },
-    
-    button: {
-        backgroundColor: '#2BF',
-        borderRadius: 20,
-        height: 50,
-        justifyContent: 'center'
-    },
-    buttontext: {
-        fontSize: 30,
-        textAlign: 'center',
-        paddingVertical: 8,
-    }
 });
