@@ -50,7 +50,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
             <View style={styles.content}>
 
-                <Text style={styles.header}>PokeDex</Text>
+                <Text style={styles.header}>PokéDex</Text>
 
                 <View style={styles.searchcontainer}>
                     <TextInput style={styles.searchfield}

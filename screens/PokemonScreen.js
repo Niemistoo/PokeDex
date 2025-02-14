@@ -11,9 +11,8 @@ export default function PokemonScreen({ navigation, route }) {
 
     const { url } = route.params;
 
-    const fetchPokemon = (id) => {
+    const fetchPokemon = () => {
         if (url) {
-            //const address = BASE_URL + id
             fetch(url)
                 .then(response => response.json())
                 .then((result) => {
@@ -38,7 +37,7 @@ export default function PokemonScreen({ navigation, route }) {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.header}>PokeDex</Text>
+                <Text style={styles.header}>PokéDex</Text>
                 {pokemon &&
                     <PokemonCard pokemon={pokemon} />
                 }

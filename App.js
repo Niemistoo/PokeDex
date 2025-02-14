@@ -16,12 +16,12 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="PokeDex"
+          initialRouteName="PokéDex"
           screenOptions={{
             header: (props) => <CustomNavBar {...props} />,
           }}
         >
-          <Stack.Screen name="PokeDex" component={HomeScreen} />
+          <Stack.Screen name="PokéDex" component={HomeScreen} />
           <Stack.Screen name="PokemonScreen" component={PokemonScreen} />
         </Stack.Navigator>    
       </NavigationContainer>
