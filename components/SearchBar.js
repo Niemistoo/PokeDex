@@ -1,11 +1,11 @@
 import { TextInput } from "react-native-paper"
-import { View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
-export default function SearchBar({ styles, criteria, setCriteria }) {
+export default function SearchBar({ criteria, setCriteria }) {
 
     return (
         <View style={styles.searchcontainer}>
-            <TextInput style={styles}
+            <TextInput
                 placeholder='Pokemon name'
                 value={criteria}
                 onChangeText={text => setCriteria(text)}
@@ -14,3 +14,11 @@ export default function SearchBar({ styles, criteria, setCriteria }) {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    searchcontainer: {
+        marginTop: 16,
+        paddingHorizontal: 16,
+    }
+
+})

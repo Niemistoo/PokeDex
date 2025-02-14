@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
             <View style={styles.content}>
                 <Header />
-                <SearchBar styles={styles.searchfield} criteria={criteria} setCriteria={setCriteria} />
+                <SearchBar criteria={criteria} setCriteria={setCriteria} />
                 <View style={styles.listview}>
                     <FlatList
                         data={filteredPokemons}
@@ -76,22 +76,14 @@ const styles = StyleSheet.create({
     content: {
         width: '100%',
         height: '100%',
-        borderColor: 'black',
         marginTop: 0,
-    },
-    searchcontainer: {
-        marginTop: 16,
-    },
-    searchfield: {
-        borderRadius: 50,
-        marginBottom: 8,
     },
     listview: {
         flex: 1,
         flexDirection: 'column',
         borderRadius: 20,
-        borderWidth: 5,
         width: '100%',
         paddingHorizontal: 10,
+        marginTop: 16,
     },
 })
